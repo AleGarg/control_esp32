@@ -160,11 +160,13 @@ $local_ip = gethostbyname(gethostname());
 header('Content-Type: application/json'); // Asegúrate de establecer el tipo de contenido
 
 echo json_encode([
+    "ip" => $local_ip,
     "valor1" => $valor1,
     "fecha1" => $fecha1,
     "valor2" => $valor2,
     "fecha2" => $fecha2,
     "diferencia_en_segundos" => $diferencia_en_segundos,
+    "tiempo_desde_ultimo_dato" => $tiempo_desde_ultimo_dato,
     "valor_concatenado" => $valor_concatenado
 ]);
 exit;

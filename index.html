@@ -9,7 +9,8 @@
     <script src="script.js" defer></script> <!-- Carga diferida del script -->
 </head>
 <body id='bodype'>
-    <div class="datos">
+    <h2>IP: <span id="ip"></span></h2>
+    <div class="datos" id="datosdiv">
         <p id='valor_concatenado'>Aquí aparecerá el valor concatenado.</p>
     </div>
     
@@ -35,8 +36,19 @@
                 .then(data => {
                     // Manejo de los datos recibidos
                     document.getElementById('valor_concatenado').innerText = data.valor_concatenado;
+                    document.querySelector('#ip').innerText = data.ip;
 
                     var iframe = document.getElementById("twitch-stream");
+
+
+                    console.log(data.tiempo_desde_ultimo_dato)
+                    if(data.tiempo_desde_ultimo_dato >= 10){
+                        document.querySelector('#datosdiv').style.visibility = 'hidden';
+                    }else{
+                        document.querySelector('#datosdiv').style.visibility = 'visible';
+                    }
+                    // document.querySelector('#ip').innerText = data.diferencia_en_segundos;
+
 
                     // Cambiar src del iframe si el valor es 8
                     if (data.valor_concatenado === '8') {
