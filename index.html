@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="control.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Control Remoto</title>
-    <script src="script.js" defer></script> <!-- Carga diferida del script -->
+    <!-- <script src="script.js" defer></script> Carga diferida del script -->
 </head>
+
 <body id='bodype'>
     <h2>IP: <span id="ip"></span></h2>
     <div class="datos" id="datosdiv">
         <p id='valor_concatenado'>Aquí aparecerá el valor concatenado.</p>
     </div>
-    
-    <form method="post" action="">
+
+    <!-- <form method="post" action="control_esp32.php">
         <input type="text" name="data" required>
         <button type="submit" name="accion" value="Atender">ENVIAR DATA TIO</button>
-    </form>
+    </form> -->
 
-    <div class="video-container">
+    <!-- <div class="video-container">
         <iframe id="twitch-stream" src="" allow="autoplay; fullscreen"></iframe>
-    </div>
+    </div> -->
 
     <script>
         // Función para realizar la solicitud AJAX
@@ -41,30 +43,116 @@
                     var iframe = document.getElementById("twitch-stream");
 
 
-                    console.log(data.tiempo_desde_ultimo_dato)
-                    if(data.tiempo_desde_ultimo_dato >= 10){
+                    console.log(data.tiempo_desde_ultimo_dato);
+                    if (data.tiempo_desde_ultimo_dato >= 5) {
                         document.querySelector('#datosdiv').style.visibility = 'hidden';
-                    }else{
+                    } else {
                         document.querySelector('#datosdiv').style.visibility = 'visible';
-                    }
-                    // document.querySelector('#ip').innerText = data.diferencia_en_segundos;
 
+                        switch (data.valor_concatenado) {
+                            case '1': window.location.assign('https:youtube.com/embed/93q3SCoSYas?si=GIawut8Jw9QtkS1U&autoplay=1'); break;
+                            case '2': window.location.assign('https:youtube.com/embed/jNQXAC9IVRw?si=7nkL4o6WMy0a4Ofd&autoplay=1'); break;
+                            case '3': window.location.assign('https:youtube.com/embed/VZzSBv6tXMw?si=ZlLVh-xx4oP6R8oV&autoplay=1'); break;
+                            case '4': window.location.assign('https:youtube.com/embed/LOeL7WHFuiA?si=PhzWRlID3u6ciEjP&autoplay=1'); break;
+                            case '5': window.location.assign('https:youtube.com/embed/OTlVmfO_j0Q?si=gxKpbqsvmhWS1PNO&autoplay=1'); break;
+                            case '6': window.location.assign('https:youtube.com/embed/wAMZ6KpMGQI?si=t9AJzUxaHGsMgb_L&autoplay=1'); break;
+                            case '7': window.location.assign('https:youtube.com/embed/avly0uwZzOE?si=-PL5f3VTaySQP0yV&autoplay=1'); break;
+                            case '8': window.location.assign('https:youtube.com/embed/NHWdTt58YI0?si=uZ1oaRZp6n8s4w1u&autoplay=1'); break;
+                            case '9': window.location.assign('https:youtube.com/embed/Vy8moBcKVIM?si=dIZCS2IzaVA9whQH&autoplay=1'); break;
+                            case '10': window.location.assign('https:youtube.com/embed/pyF2mK939aM?si=c1VFY8y3ZSDjTUTy&autoplay=1'); break;
+                            case '11': window.location.assign('https:youtube.com/embed/IscGtF_A14A?si=L-q9m64iLXkb4Zw7&autoplay=1'); break;
+                            case '12': window.location.assign('https:youtube.com/embed/Vy8moBcKVIM?si=bsxezwNejkFEaAjR&autoplay=1'); break;
+                            case '13': window.location.assign('https:youtube.com/embed/VCUDn-B6Ack?si=__LsDjjpieKKmcfv&autoplay=1'); break;
+                            case '14': window.location.assign('https:youtube.com/embed/L6kYE3IH_8Q?si=nM-ZtDxAM-DOx1ac&autoplay=1'); break;
+                            case '15': window.location.assign('www.https:youtube.com/live/O9mOtdZ-nSk?si=-PzXRdkpYpw54qvd&autoplay=1'); break;
+                            case '16': window.location.assign('www.https:youtube.com/live/QGpHLgRnrx4?si=LuP0boczeF2sEErx&autoplay=1'); break;
+                            case '17': window.location.assign('www.https:youtube.com/live/RNnodM3XXiA?si=ie2IrtQqAOb47hbd&autoplay=1'); break;
+                            case '18': window.location.assign('www.https:youtube.com/live/jfKfPfyJRdk?si=5lx4fCph_hpLIKUf&autoplay=1'); break;
+                            case '19': window.location.assign('www.https:youtube.com/live/pwsI-K5Dn68?si=YDHnkEw4NjOXmtTd&autoplay=1'); break;
+                            case '20': window.location.assign('www.https:youtube.com/live/8x_Ziv-XKrU?si=lbbjGDmACehO4ZDe&autoplay=1'); break;
+                            case '21': window.location.assign('www.https:youtube.com/live/cOLQACygN5A?si=e8mBh1U5IsjaJ1Q0&autoplay=1'); break;
+                            case '22': window.location.assign('www.https:youtube.com/live/lTjkFcVlypQ?si=Mop4wm3y_fDkCvqf&autoplay=1'); break;
+                            case '23': window.location.assign('www.https:youtube.com/live/yOFsrafOuFU?si=4Dm3n-qQ1Y3ZBHmf&autoplay=1'); break;
+                            case '24': window.location.assign('www.https:youtube.com/live/IJbbpAhjboI?si=vZDLJtkG37T-gVOB&autoplay=1'); break;
+                            case '25': window.location.assign('www.https:youtube.com/live/ezUxQwz7Vl4?si=kwuTheyZcWWFu-Bc&autoplay=1'); break;
+                            case '26': window.location.assign('https:youtube.com/embed/kSv6qlPtvR0?si=6DZtUcj9U7ulQX_-&autoplay=1'); break;
+                            case '27': window.location.assign('https:youtube.com/embed/vM34iKSsW0Y?si=TuCWqJHn9y9hAc57&autoplay=1'); break;
+                            case '28': window.location.assign('https:youtube.com/embed/Rh2lPav9bD4?si=CEX8k-gwrhYmBwLP&autoplay=1'); break;
+                            case '29': window.location.assign('https:youtube.com/embed/0N61MFJsL9o?si=2sBiT9BIgINmt-QC&autoplay=1'); break;
+                            case '30': window.location.assign('https:youtube.com/embed/GbLFQiix254?si=X_b03pif-JbyzW1n&autoplay=1'); break;
+                            case '31': window.location.assign('https:youtube.com/embed/ptJJG8ucn48?si=c7SWkb-qOqUZYemK&autoplay=1'); break;
+                            case '32': window.location.assign('https:youtube.com/embed/-S-D_E9y86Q?si=IsPsn7L96q6hQYM_&autoplay=1'); break;
+                            case '33': window.location.assign('https:youtube.com/embed/UaMBtjxvuMA?si=R2DdwJQOBMuZ2INd&autoplay=1'); break;
+                            case '34': window.location.assign('https:youtube.com/embed/X2DjUzp2AYc?si=jIZdTWDNHVTxULBh&autoplay=1'); break;
+                            case '35': window.location.assign('https:youtube.com/embed/dQw4w9WgXcQ?si=VI5_0_4EfPE_8b5a&autoplay=1'); break;
+                            case '36': window.location.assign('https:youtube.com/embed/sOnqjkJTMaA?si=Nn6fXKLTANzTbVtg&autoplay=1'); break;
+                            case '37': window.location.assign('www.https:youtube.com/live/JrqOrB5hUvQ?si=Mnel_Iv4EpJ-fe_H&autoplay=1'); break;
+                            case '38': window.location.assign('www.https:youtube.com/live/S8nF3ufkSbE?si=ViZcPyAYYmAKJNEC&autoplay=1'); break;
+                            case '39': window.location.assign('www.https:youtube.com/live/WlILy7UxRFg?si=gySTbpvPEsLWTAtR&autoplay=1'); break;
+                            case '40': window.location.assign('www.https:youtube.com/live/9fv7pJ69o3E?si=bruWkjp9e-aG2ZAz&autoplay=1'); break;
+                            case '41': window.location.assign('https:youtube.com/embed/fD8Jt4BQ8sc?si=ENU3gIOLHGT76ATo&autoplay=1'); break;
+                            case '42': window.location.assign('https:youtube.com/embed/T7hhuUKl2Nc?si=NP5dDxuHIk2yI7Pm&autoplay=1'); break;
+                            case '43': window.location.assign('https:youtube.com/embed/LbMj3I6o8ec?si=zmu4M_N744rVfL68&autoplay=1'); break;
+                            case '44': window.location.assign('www.https:youtube.com/live/vXGWaUZjDAQ?si=Gqu1cRVW6pb38RQX&autoplay=1'); break;
+                            case '45': window.location.assign('https:youtube.com/embed/43q1gqJClYc?si=oJwl91uqf6sPJX7c&autoplay=1'); break;
+                            case '46': window.location.assign('https:youtube.com/embed/JqVnOTE1dAw?si=d_Nn1jpMJwuv7o09&autoplay=1'); break;
+                            case '47': window.location.assign('https:youtube.com/embed/ywwfV2VqBNg?si=MwBJ1crhYYteHMi1&autoplay=1'); break;
+                            case '48': window.location.assign('https:youtube.com/embed/IK01V1oED9w?si=fAkaSTIq1uZjGe5E&autoplay=1'); break;
+                            case '49': window.location.assign('https:youtube.com/embed/8J7x3I7x2YM?si=ZD1ksSZ_eG7227ek&autoplay=1'); break;
+                            case '50': window.location.assign('https:youtube.com/embed/cqisQbPgimc?si=tNYpmn8zg2MD5GAT&autoplay=1'); break;
+                            case '51': window.location.assign('https:youtube.com/embed/Mf9d95hmodQ?si=gnRs44fk0c3tb34r&autoplay=1'); break;
+                            case '52': window.location.assign('https:youtube.com/embed/IMOoSx1aml8?si=nWn0t9lX8DEVCUZU&autoplay=1'); break;
+                            case '53': window.location.assign('https:youtube.com/embed/0KHZMwEPUWA?si=zpzJ8Yv5NUThaD-8&autoplay=1'); break;
+                            case '54': window.location.assign('https:youtube.com/embed/D9mejxHfyHQ?si=Biv1r8bObDazyOEh&autoplay=1'); break;
+                            case '55': window.location.assign('https:youtube.com/embed/SqYokzzvlx0?si=bQ48tvOwnWT8CL4-&autoplay=1'); break;
+                            case '56': window.location.assign('https:youtube.com/embed/PrWJhgDoAF4?si=tj1bsy5y8Ufgvuil&autoplay=1'); break;
+                            case '57': window.location.assign('https:youtube.com/embed/bHLgLU5spfw?si=3AvN7iQ3Os3tnsTe&autoplay=1'); break;
+                            case '58': window.location.assign('https:youtube.com/embed/QJ_68ynfQLo?si=E9fIu86bx4tDtjKi&autoplay=1'); break;
+                            case '59': window.location.assign('https:youtube.com/embed/2qoxaSxAkB8?si=SKVBjVU8YkgSxhdg&autoplay=1'); break;
+                            case '60': window.location.assign('https:youtube.com/embed/8hsy5KLEOgc?si=FT8Q7kGZz2WhCa2v&autoplay=1'); break;
+                            case '61': window.location.assign('https:youtube.com/embed/NZ0I2GHgavU?si=j93Ey8B1un07vuLn&autoplay=1'); break;
+                            case '62': window.location.assign('https:youtube.com/embed/Pc7MgRYjLxU?si=Qa5i0YYCHiRw-DDX&autoplay=1'); break;
+                            case '63': window.location.assign('https:youtube.com/embed/amEEuXT1bgI?si=X_coXYBpDFwaR9bM&autoplay=1'); break;
+                            case '64': window.location.assign('https:youtube.com/embed/o9rILjy1WK4?si=YqfhhR-ua2PWTPob&autoplay=1'); break;
+                            case '65': window.location.assign('https:youtube.com/embed/FEbBEAzqqtg?si=RA_Slw-sQXKZwUiV&autoplay=1'); break;
+                            case '66': window.location.assign('https:youtube.com/embed/Mzp6fjCFHwQ?si=Cdxec2E00DZzKRNx&autoplay=1'); break;
+                            case '67': window.location.assign('https:youtube.com/embed/lSm4QZqN8cA?si=D33nphqP3w29asUd&autoplay=1'); break;
+                            case '68': window.location.assign('https:youtube.com/embed/01aV_PbiT30?si=2VA1vF8V38OJOcMS&autoplay=1'); break;
+                            case '69': window.location.assign('https:youtube.com/embed/hS1rML81A_E?si=bULLedawj2D2YgTk&autoplay=1'); break;
+                            case '70': window.location.assign('https:youtube.com/embed/J3pXcqH87s4?si=fveFpdc5MV6NPbat&autoplay=1'); break;
+                            case '71': window.location.assign('https:youtube.com/embed/D330hKp8fgo?si=KCTm5rTM0ph1hGcd&autoplay=1'); break;
+                            case '72': window.location.assign('https:youtube.com/embed/0CmiSiujNzs?si=8jlHuKtztUC2dBX-&autoplay=1'); break;
+                            case '73': window.location.assign('https:youtube.com/embed/B1HLUUB0aig?si=quSxI13PNd-zfdFW&autoplay=1'); break;
+                            case '74': window.location.assign('https:youtube.com/embed/He7dSGhyeHA?si=mfJ3oKcjwf0LTlu2&autoplay=1'); break;
+                            case '75': window.location.assign('https:youtube.com/embed/1jGtsGSDpz8?si=ite7CKpFa6p1lVsd&autoplay=1'); break;
+                            case '76': window.location.assign('https:youtube.com/embed/vmVtgmgLPzw?si=pWtN5vF_1msLAO5G&autoplay=1'); break;
+                            case '77': window.location.assign('https:youtube.com/embed/OX-us7PEfkc?si=9ovB32TK5_Cgza0t&autoplay=1'); break;
+                            case '78': window.location.assign('https:youtube.com/embed/UCF9oHXhDMU?si=7B3URFnq4K7bx6nh&autoplay=1'); break;
+                            case '79': window.location.assign('https:youtube.com/embed/XFkzRNyygfk?si=Y9Hp7oLBE6IcsHXQ&autoplay=1'); break;
+                            case '80': window.location.assign('https:youtube.com/embed/2ePJtjHXY3M?si=Qoq00YMxZLNirsvX&autoplay=1'); break;
+                            case '81': window.location.assign('https:youtube.com/embed/S-MQNuYb9uM?si=rFOkhHYSxEGovjT2&autoplay=1'); break;
+                            case '82': window.location.assign('https:youtube.com/embed/xFp7btucv58?si=t18SRMpRZQPH0snb&autoplay=1'); break;
+                            case '83': window.location.assign('https:youtube.com/embed/5cOZXfhdNjQ?si=6_IJ8DvvaKjY5HMm&autoplay=1'); break;
+                            case '84': window.location.assign('https:youtube.com/embed/teON5axS2UM?si=qCi1M3IUZwxWmYcL&autoplay=1'); break;
+                            case '85': window.location.assign('https:youtube.com/embed/9Ef6GJVurUk?si=Hv4OUY3nQerwwnux&autoplay=1'); break;
+                            case '86': window.location.assign('https:youtube.com/embed/uqGXNcOSOfY?si=GD5CmRHufhTIftIM&autoplay=1'); break;
+                            case '87': window.location.assign('https:youtube.com/embed/lgoCbZPpO1s?si=D7EY6tho74E7TJgw&autoplay=1'); break;
+                            case '88': window.location.assign('https:youtube.com/embed/U5nM3pSuBjw?si=Vv0aqAMkWubuT5YR&autoplay=1'); break;
+                            case '89': window.location.assign('https:youtube.com/embed/Sl1R2j4UqNY?si=t82omSIIKjizhwb0&autoplay=1'); break;
+                            case '90': window.location.assign('https:youtube.com/embed/FRcP2oxTEtU?si=6Vzaj_pIh9RLQjj6&autoplay=1'); break;
+                            case '91': window.location.assign('https:youtube.com/embed/-B9do8DLBhQ?si=D7tI2P5Qar_rNTgr&autoplay=1'); break;
+                            case '92': window.location.assign('https:youtube.com/embed/ptP1XswdJV0?si=EzBUvEXgRqFPvSeN&autoplay=1'); break;
+                            case '93': window.location.assign('https:youtube.com/embed/WZ3Kl10BJZc?si=8ms1AuqVbW6yB8qO&autoplay=1'); break;
+                            case '94': window.location.assign('https:youtube.com/embed/vsAUpnfaPSA?si=wln_6d4moH_K06Fl&autoplay=1'); break;
+                            case '95': window.location.assign('https:youtube.com/embed/XF-KPJ5APRM?si=7rB9alntZCgx9SXz&autoplay=1'); break;
+                            case '96': window.location.assign('https:youtube.com/embed/OvGF6za9xOo?si=VEfetzZreChNqx9B&autoplay=1'); break;
+                            case '97': window.location.assign('https:youtube.com/embed/WKaCRI06AMA?si=-i6ULlxEh2_7ssVX&autoplay=1'); break;
+                            case '98': window.location.assign('https:youtube.com/embed/9IxHntlE2xc?si=GByFzN5L19ldwC5c&autoplay=1'); break;
+                            case '99': window.location.assign('https:youtube.com/embed/VqB1uoDTdKM?si=XvnKaRZseu2A3tlm&autoplay=1'); break;
+                            case '100': window.location.assign('https:youtube.com/embed/nugrbr8dvvk?si=ONhdd0uDMNGmo6Ay&autoplay=1'); break;
+                        }
+                    }
 
-                    // Cambiar src del iframe si el valor es 8
-                    if (data.valor_concatenado === '8') {
-                        iframe.src = "https://player.twitch.tv/?channel=rubius&parent=localhost&autoplay=true";
-                    }
-                    else if (data.valor_concatenado === "69") {
-                    // <iframe width="1366" height="480" src="https://www.youtube.com/embed/cpLrWyAaC_U" title="Gol de Juan Fernando Quintero en la final de la Copa Libertadores" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    
-                    iframe.src = "https://www.youtube.com/embed/cpLrWyAaC_U";
-                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-                    iframe.referrerpolicy="strict-origin-when-cross-origin";
-                    iframe.setAttribute('allowFullScreen', '')
-                    }
-                    else{
-                        iframe.src = "";
-                    }
                 })
                 .catch(error => {
                     console.error('Error al cargar los datos:', error);
@@ -72,7 +160,8 @@
         }
 
         // Llamar a la función para cargar datos cada X segundos
-        setInterval(cargarDatos, 10); // Cada segundo
+        setInterval(cargarDatos, 200); // Cada 200ms
     </script>
 </body>
+
 </html>

@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 // Configuración de la conexión a la base de datos
 $servername = "localhost"; // Cambia esto si tu servidor es diferente
 $username = "root"; // Cambia esto si tienes otro usuario
@@ -24,21 +28,12 @@ $fecha_actual = date('Y-m-d H:i:s');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = $_POST['data'] ?? 'No data received';
 
-    // VALORES POR SI LAS DUDAS:
-    // 
-    //     'CH-' : '45',    'CH'  : '46',   'CH+'      : '47',
-    //     'PREV': '44',    'NEXT': '40',   'PLAYPAUSE': '43',
-    //     'VOL-': '07',    'VOL+': '15',   'EQ'       : '09',
-    //     '0'   : '16',    '100' : '19',   '200'      : '0d',
-    //     '1'   : '0c',    '2'   : '18',   '3'        : '5e',
-    //     '4'   : '08',    '5'   : '1c',   '6'        : '5a',
-    //     '7'   : '42',    '8'   : '52',   '9'        : '4a'    
-
     if($data == 'PREV'){
         echo "<h1>
             Retrocediendo
         </h1>";
-        system("cmd /c C:/control/ejecutar.bat");
+        // system("cmd /c C:/control/ejecutar.bat");
+        system("cmd /c C:/xampp/htdocs/control_esp32/iratras.bat");
     }
     if($data == 'CH_mas'){
         $data = "CH+";
@@ -80,9 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Obtener el último valor almacenado
-// Obtener los dos últimos registros
-// $result = $conn->query("SELECT valor, fecha, concatenado FROM datos_recibidos ORDER BY id DESC LIMIT 2");
 $result = $conn->query("SELECT valor, fecha, 
                  TIMESTAMPDIFF(SECOND, 
                                (SELECT fecha FROM datos_recibidos ORDER BY id DESC LIMIT 1 OFFSET 1), 
@@ -104,7 +96,7 @@ $diferencia_en_segundos = $ultimos_datos[0]['diferencia_en_segundos'] ?? 'Ningun
 // Calcular la diferencia de tiempo y concatenar si ambos son numéricos y si la diferencia es menor a 10 segundos
 if ($fecha1 && $fecha2) {
     if (is_numeric($valor1) && is_numeric($valor2)) {
-        if ($diferencia_en_segundos < 10) {
+        if ($diferencia_en_segundos < 5) {
             $valor_concatenado = $valor2 . $valor1;
         } else {
             $valor_concatenado = $valor1;
@@ -134,27 +126,8 @@ $source = null;
     $tiempo_desde_ultimo_dato = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 // ============================ VER SI PASARON MENOS DE 10 SEGUNDOS =====================================
 
-// header("Refresh:0");
-
 // CONSEGUIR IP 
 $local_ip = gethostbyname(gethostname());
-
-// echo "<br>Diferencia en segundos: $diferencia_en_segundos <br>";
-
-// // Verificar si la diferencia es menor a 10 segundos
-// if ($diferencia_en_segundos < 10) {
-//     // El valor fue recibido hace menos de 10 segundos
-//     echo "El valor es reciente<br>";
-// } else {
-//     // El valor es más viejo de 10 segundos
-//     echo "El valor es antiguo<br>";
-// }
-
-// echo "Tiempo desde ultimo dato: " . $tiempo_desde_ultimo_dato."s<br>";   
-
-// echo "IP: ".$local_ip;
-
-// Preparar la respuesta en formato JSON
 
 // Preparar la respuesta en formato JSON
 header('Content-Type: application/json'); // Asegúrate de establecer el tipo de contenido
