@@ -24,6 +24,40 @@ $total_filas = $row['total'];
 
 $fecha_actual = date('Y-m-d H:i:s');
 
+// ===================== CONSEGUIR ULTIMOS DATOS =====================
+
+$resultDatos = $conn->query("SELECT valor, fecha, 
+                                TIMESTAMPDIFF(SECOND, 
+                                            (SELECT fecha FROM datos_recibidos ORDER BY id DESC LIMIT 1 OFFSET 1), 
+                                            (SELECT fecha FROM datos_recibidos ORDER BY id DESC LIMIT 1)) 
+                                AS diferencia_en_segundos 
+                        FROM datos_recibidos 
+                        ORDER BY id DESC 
+                        LIMIT 2");
+$ultimos_datos = $resultDatos->fetch_all(MYSQLI_ASSOC);
+
+$valor1 = $ultimos_datos[0]['valor'] ?? '';
+$fecha1 = $ultimos_datos[0]['fecha'] ?? '';
+
+$valor2 = $ultimos_datos[1]['valor'] ?? '';
+$fecha2 = $ultimos_datos[1]['fecha'] ?? '';
+
+$diferencia_en_segundos = $ultimos_datos[0]['diferencia_en_segundos'] ?? 'Ninguna, 1er valor';
+
+// ===================== CONSEGUIR ULTIMOS DATOS =====================
+
+// ============================ VER SI PASARON MENOS DE 10 SEGUNDOS =====================================
+    // Crear objetos DateTime a partir de las fechas
+    $dateTimeActual = new DateTime($fecha_actual);
+    $dateTime1 = new DateTime($fecha1);
+
+    // Calcular la diferencia
+    $interval = $dateTimeActual->diff($dateTime1);
+
+    // Calcular la diferencia total en segundos
+    $tiempo_desde_ultimo_dato = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+// ============================ VER SI PASARON MENOS DE 10 SEGUNDOS =====================================
+
 // Manejar la solicitud POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = $_POST['data'] ?? 'No data received';
@@ -51,17 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
         echo "Dato no numérico recibido, se ha vaciado la tabla y se ha cargado el nuevo valor.";
         $valor_concatenado = $data; // Guardar como valor concatenado
-    } else {
+    } else{
         // Caso 1: Si la tabla está vacía, agregar el nuevo dato
         // Caso 2: Si hay 1 solo dato, agregar el segundo
-        if ($total_filas == 0 || $total_filas == 1) {
+        
+        if ($total_filas == 0 || $total_filas == 1 && $tiempo_desde_ultimo_dato < 5) {
             $stmt = $conn->prepare("INSERT INTO datos_recibidos (valor, fecha) VALUES (?, ?)");
             $stmt->bind_param("ss", $data, $fecha_actual);
             $stmt->execute();
             echo "DATO CARGADO TIO";
         }
         // Caso 3: Si hay 2 datos, borrar ambos y agregar el nuevo dato
-        elseif ($total_filas >= 2 ) {
+        elseif ($total_filas >= 2 || $tiempo_desde_ultimo_dato >= 5 ) {
             // Borrar los 2 registros actuales
             $conn->query("TRUNCATE TABLE datos_recibidos");
 
@@ -74,24 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
     }
 }
-
-$result = $conn->query("SELECT valor, fecha, 
-                 TIMESTAMPDIFF(SECOND, 
-                               (SELECT fecha FROM datos_recibidos ORDER BY id DESC LIMIT 1 OFFSET 1), 
-                               (SELECT fecha FROM datos_recibidos ORDER BY id DESC LIMIT 1)) 
-                 AS diferencia_en_segundos 
-          FROM datos_recibidos 
-          ORDER BY id DESC 
-          LIMIT 2");
-$ultimos_datos = $result->fetch_all(MYSQLI_ASSOC);
-
-$valor1 = $ultimos_datos[0]['valor'] ?? '';
-$fecha1 = $ultimos_datos[0]['fecha'] ?? '';
-
-$valor2 = $ultimos_datos[1]['valor'] ?? '';
-$fecha2 = $ultimos_datos[1]['fecha'] ?? '';
-
-$diferencia_en_segundos = $ultimos_datos[0]['diferencia_en_segundos'] ?? 'Ninguna, 1er valor';
 
 // Calcular la diferencia de tiempo y concatenar si ambos son numéricos y si la diferencia es menor a 10 segundos
 if ($fecha1 && $fecha2) {
@@ -113,18 +130,6 @@ if ($fecha1 && $fecha2) {
 
 // Mostrar el valor concatenado y otras informaciones
 $source = null;
-
-// ============================ VER SI PASARON MENOS DE 10 SEGUNDOS =====================================
-    // Crear objetos DateTime a partir de las fechas
-    $dateTimeActual = new DateTime($fecha_actual);
-    $dateTime1 = new DateTime($fecha1);
-
-    // Calcular la diferencia
-    $interval = $dateTimeActual->diff($dateTime1);
-
-    // Calcular la diferencia total en segundos
-    $tiempo_desde_ultimo_dato = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
-// ============================ VER SI PASARON MENOS DE 10 SEGUNDOS =====================================
 
 // CONSEGUIR IP 
 $local_ip = gethostbyname(gethostname());
