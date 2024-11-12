@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </h1>";
         // system("cmd /c C:/control/ejecutar.bat");
         system("cmd /c C:/xampp/htdocs/control_esp32/iratras.bat");
+        $diferencia_en_segundos = 10;
     }
     if($data == 'CH_mas'){
         $data = "CH+";

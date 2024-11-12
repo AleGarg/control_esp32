@@ -10,11 +10,14 @@
     <!-- <script src="script.js" defer></script> Carga diferida del script -->
 </head>
 
-<body id='bodype'>
+<body id='bodype' style="width: 100vw;
+height: 100vh;">
     <h2>IP: <span id="ip"></span></h2>
     <div class="datos" id="datosdiv">
         <p id='valor_concatenado'>Aquí aparecerá el valor concatenado.</p>
     </div>
+
+    <h1 class="h1edit">CONTROL REMOTO</h1>
 
     <!-- <form method="post" action="control_esp32.php">
         <input type="text" name="data" required>
@@ -42,58 +45,66 @@
 
                     var iframe = document.getElementById("twitch-stream");
 
+                    let valorconc = data.valor_concatenado;
+                    let tiempodesdeultimodato = data.tiempo_desde_ultimo_dato;
 
-                    console.log(data.tiempo_desde_ultimo_dato);
-                    if (data.tiempo_desde_ultimo_dato >= 5) {
+                    // if(valorconc == 'PREV'){
+                    //     tiempodesdeultimodato = 7;
+                    // }
+
+
+                    console.log(tiempodesdeultimodato);
+                    if (tiempodesdeultimodato >= 5) {
                         document.querySelector('#datosdiv').style.visibility = 'hidden';
-                    } else {
+                    } else if (tiempodesdeultimodato < 5) {
                         document.querySelector('#datosdiv').style.visibility = 'visible';
 
-                        switch (data.valor_concatenado) {
-                            case '1': window.location.assign('https:youtube.com/embed/93q3SCoSYas?si=GIawut8Jw9QtkS1U&autoplay=1'); break;
-                            case '2': window.location.assign('https:youtube.com/embed/jNQXAC9IVRw?si=7nkL4o6WMy0a4Ofd&autoplay=1'); break;
-                            case '3': window.location.assign('https:youtube.com/embed/VZzSBv6tXMw?si=ZlLVh-xx4oP6R8oV&autoplay=1'); break;
-                            case '4': window.location.assign('https:youtube.com/embed/LOeL7WHFuiA?si=PhzWRlID3u6ciEjP&autoplay=1'); break;
-                            case '5': window.location.assign('https:youtube.com/embed/OTlVmfO_j0Q?si=gxKpbqsvmhWS1PNO&autoplay=1'); break;
+                        console.log('funcionando');
+                        switch (valorconc) {
+                            case '1': window.location.assign('https:youtube.com/embed/FA1sR2SZAlY?si=X_b03pif-JbyzW1n&autoplay=1'); break;
+                            case '21': window.location.assign('https:youtube.com/embed/jNQXAC9IVRw?si=7nkL4o6WMy0a4Ofd&autoplay=1'); break; // 21, ME AT THE ZOO
+                            case '3': window.location.assign('https:youtube.com/embed/VZzSBv6tXMw?si=ZlLVh-xx4oP6R8oV&autoplay=1'); break; // NO DISPONIBLE (MINERO)
+                            case '31': window.location.assign('https:youtube.com/embed/LOeL7WHFuiA?si=PhzWRlID3u6ciEjP&autoplay=1'); break; // HOMERO SI CANTA
+                            case '5': window.location.assign('https://youtube.com/embed/QVa57HiQqYA?t=870?si=gxKpbqsvmhWS1PNO&autoplay=1'); break; // DRAGON BALL
                             case '6': window.location.assign('https:youtube.com/embed/wAMZ6KpMGQI?si=t9AJzUxaHGsMgb_L&autoplay=1'); break;
-                            case '7': window.location.assign('https:youtube.com/embed/avly0uwZzOE?si=-PL5f3VTaySQP0yV&autoplay=1'); break;
-                            case '8': window.location.assign('https:youtube.com/embed/NHWdTt58YI0?si=uZ1oaRZp6n8s4w1u&autoplay=1'); break;
-                            case '9': window.location.assign('https:youtube.com/embed/Vy8moBcKVIM?si=dIZCS2IzaVA9whQH&autoplay=1'); break;
-                            case '10': window.location.assign('https:youtube.com/embed/pyF2mK939aM?si=c1VFY8y3ZSDjTUTy&autoplay=1'); break;
-                            case '11': window.location.assign('https:youtube.com/embed/IscGtF_A14A?si=L-q9m64iLXkb4Zw7&autoplay=1'); break;
-                            case '12': window.location.assign('https:youtube.com/embed/Vy8moBcKVIM?si=bsxezwNejkFEaAjR&autoplay=1'); break;
-                            case '13': window.location.assign('https:youtube.com/embed/VCUDn-B6Ack?si=__LsDjjpieKKmcfv&autoplay=1'); break;
+                            case '7': window.location.assign('https:youtube.com/embed/avly0uwZzOE? si=-PL5f3VTaySQP0yV&autoplay=1'); break;  // cronica
+                            case '8': window.location.assign('https:youtube.com/embed/NHWdTt58YI0?si=uZ1oaRZp6n8s4w1u&autoplay=1'); break; // GOLES CR7
+                            case '9': window.location.assign('https:youtube.com/embed/Vy8moBcKVIM?si=dIZCS2IzaVA9whQH&autoplay=1'); break; // NO ANDA ???
+                            case '10': window.location.assign('https:youtube.com/embed/pyF2mK939aM?si=c1VFY8y3ZSDjTUTy&autoplay=1'); break; // GOLES NAZARIO
+                            case '11': window.location.assign('https:www.youtube.com/embed/PwJ4ZMJTgZc'); break;
+                            case '12': window.location.assign('https:youtube.com/embed/Vy8moBcKVIM?si=bsxezwNejkFEaAjR&autoplay=1'); break; // TAMPOCO ANDA
+                            case '13': window.location.assign('https:youtube.com/embed/VCUDn-B6Ack?si=__LsDjjpieKKmcfv&autoplay=1'); break; // FINN VS MORDECAI
                             case '14': window.location.assign('https:youtube.com/embed/L6kYE3IH_8Q?si=nM-ZtDxAM-DOx1ac&autoplay=1'); break;
-                            case '15': window.location.assign('www.https:youtube.com/live/O9mOtdZ-nSk?si=-PzXRdkpYpw54qvd&autoplay=1'); break;
-                            case '16': window.location.assign('www.https:youtube.com/live/QGpHLgRnrx4?si=LuP0boczeF2sEErx&autoplay=1'); break;
-                            case '17': window.location.assign('www.https:youtube.com/live/RNnodM3XXiA?si=ie2IrtQqAOb47hbd&autoplay=1'); break;
-                            case '18': window.location.assign('www.https:youtube.com/live/jfKfPfyJRdk?si=5lx4fCph_hpLIKUf&autoplay=1'); break;
-                            case '19': window.location.assign('www.https:youtube.com/live/pwsI-K5Dn68?si=YDHnkEw4NjOXmtTd&autoplay=1'); break;
-                            case '20': window.location.assign('www.https:youtube.com/live/8x_Ziv-XKrU?si=lbbjGDmACehO4ZDe&autoplay=1'); break;
-                            case '21': window.location.assign('www.https:youtube.com/live/cOLQACygN5A?si=e8mBh1U5IsjaJ1Q0&autoplay=1'); break;
-                            case '22': window.location.assign('www.https:youtube.com/live/lTjkFcVlypQ?si=Mop4wm3y_fDkCvqf&autoplay=1'); break;
-                            case '23': window.location.assign('www.https:youtube.com/live/yOFsrafOuFU?si=4Dm3n-qQ1Y3ZBHmf&autoplay=1'); break;
-                            case '24': window.location.assign('www.https:youtube.com/live/IJbbpAhjboI?si=vZDLJtkG37T-gVOB&autoplay=1'); break;
-                            case '25': window.location.assign('www.https:youtube.com/live/ezUxQwz7Vl4?si=kwuTheyZcWWFu-Bc&autoplay=1'); break;
-                            case '26': window.location.assign('https:youtube.com/embed/kSv6qlPtvR0?si=6DZtUcj9U7ulQX_-&autoplay=1'); break;
+                            case '15': window.location.assign('https:youtube.com/embed/O9mOtdZ-nSk?si=-PzXRdkpYpw54qvd&autoplay=1'); break; // EURONEWS
+                            case '16': window.location.assign('https:youtube.com/embed/QGpHLgRnrx4?si=LuP0boczeF2sEErx&autoplay=1'); break; // NO ANDA
+                            case '17': window.location.assign('https:youtube.com/embed/RNnodM3XXiA?si=ie2IrtQqAOb47hbd&autoplay=1'); break; // NO ANDA
+                            case '18': window.location.assign('https:youtube.com/embed/jfKfPfyJRdk?si=5lx4fCph_hpLIKUf&autoplay=1'); break;
+                            case '19': window.location.assign('https:youtube.com/embed/pwsI-K5Dn68?si=YDHnkEw4NjOXmtTd&autoplay=1'); break; // ALF LATINO
+                            case '20': window.location.assign('https:youtube.com/embed/8x_Ziv-XKrU?si=lbbjGDmACehO4ZDe&autoplay=1'); break; // TV NIÑOS
+                            case '2': window.location.assign('https:www.youtube.com/embed/N1Tfrn7hMWU'); break; // C5N
+                            case '22': window.location.assign('https:youtube.com/embed/lTjkFcVlypQ?si=Mop4wm3y_fDkCvqf&autoplay=1'); break; // PHINEAS Y FERB
+                            case '23': window.location.assign('https://www.youtube.com/embed/6dp-bvQ7RWo?si=X_b03pif-JbyzW1n&autoplay=1'); break;
+                            case '24': window.location.assign('https:youtube.com/embed/IJbbpAhjboI?si=vZDLJtkG37T-gVOB&autoplay=1'); break; // TOM Y JERRY
+                            case '25': window.location.assign('https:youtube.com/embed/ezUxQwz7Vl4?si=kwuTheyZcWWFu-Bc&autoplay=1'); break; // MASHA Y EL OSO
+                            case '26': window.location.assign('https:youtube.com/embed/kSv6qlPtvR0?si=6DZtUcj9U7ulQX_-&autoplay=1'); break; // MC 1 MINUTO
                             case '27': window.location.assign('https:youtube.com/embed/vM34iKSsW0Y?si=TuCWqJHn9y9hAc57&autoplay=1'); break;
                             case '28': window.location.assign('https:youtube.com/embed/Rh2lPav9bD4?si=CEX8k-gwrhYmBwLP&autoplay=1'); break;
                             case '29': window.location.assign('https:youtube.com/embed/0N61MFJsL9o?si=2sBiT9BIgINmt-QC&autoplay=1'); break;
                             case '30': window.location.assign('https:youtube.com/embed/GbLFQiix254?si=X_b03pif-JbyzW1n&autoplay=1'); break;
-                            case '31': window.location.assign('https:youtube.com/embed/ptJJG8ucn48?si=c7SWkb-qOqUZYemK&autoplay=1'); break;
-                            case '32': window.location.assign('https:youtube.com/embed/-S-D_E9y86Q?si=IsPsn7L96q6hQYM_&autoplay=1'); break;
-                            case '33': window.location.assign('https:youtube.com/embed/UaMBtjxvuMA?si=R2DdwJQOBMuZ2INd&autoplay=1'); break;
-                            case '34': window.location.assign('https:youtube.com/embed/X2DjUzp2AYc?si=jIZdTWDNHVTxULBh&autoplay=1'); break;
-                            case '35': window.location.assign('https:youtube.com/embed/dQw4w9WgXcQ?si=VI5_0_4EfPE_8b5a&autoplay=1'); break;
+                            case '4': window.location.assign('https://www.youtube.com/embed/cb12KmMMDJA?si=X_b03pif-JbyzW1n&autoplay=1'); break; // TN
+                            case '32': window.location.assign('https:youtube.com/embed/-S-D_E9y86Q?si=IsPsn7L96q6hQYM_&autoplay=1'); break; // EL HECHICERO PATO LUCAS
+                            case '33': window.location.assign('https:youtube.com/embed/UaMBtjxvuMA?si=R2DdwJQOBMuZ2INd&autoplay=1'); break; // GERMAN
+                            case '34': window.location.assign('https:youtube.com/embed/X2DjUzp2AYc?si=jIZdTWDNHVTxULBh&autoplay=1'); break; // GERMAN
+                            case '35': window.location.assign('https:youtube.com/embed/dQw4w9WgXcQ?si=VI5_0_4EfPE_8b5a&autoplay=1'); break; // RICKROLL
                             case '36': window.location.assign('https:youtube.com/embed/sOnqjkJTMaA?si=Nn6fXKLTANzTbVtg&autoplay=1'); break;
-                            case '37': window.location.assign('www.https:youtube.com/live/JrqOrB5hUvQ?si=Mnel_Iv4EpJ-fe_H&autoplay=1'); break;
-                            case '38': window.location.assign('www.https:youtube.com/live/S8nF3ufkSbE?si=ViZcPyAYYmAKJNEC&autoplay=1'); break;
-                            case '39': window.location.assign('www.https:youtube.com/live/WlILy7UxRFg?si=gySTbpvPEsLWTAtR&autoplay=1'); break;
-                            case '40': window.location.assign('www.https:youtube.com/live/9fv7pJ69o3E?si=bruWkjp9e-aG2ZAz&autoplay=1'); break;
-                            case '41': window.location.assign('https:youtube.com/embed/fD8Jt4BQ8sc?si=ENU3gIOLHGT76ATo&autoplay=1'); break;
+                            case '37': window.location.assign('https:youtube.com/embed/JrqOrB5hUvQ?si=Mnel_Iv4EpJ-fe_H&autoplay=1'); break;
+                            case '38': window.location.assign('https:youtube.com/embed/S8nF3ufkSbE?si=ViZcPyAYYmAKJNEC&autoplay=1'); break;
+                            case '39': window.location.assign('https:youtube.com/embed/WlILy7UxRFg?si=gySTbpvPEsLWTAtR&autoplay=1'); break;
+                            case '40': window.location.assign('https:youtube.com/embed/9fv7pJ69o3E?si=bruWkjp9e-aG2ZAz&autoplay=1'); break;
+                            case '41': window.location.assign('https:www.youtube.com/embed/axlwpe6zLIM'); break;
                             case '42': window.location.assign('https:youtube.com/embed/T7hhuUKl2Nc?si=NP5dDxuHIk2yI7Pm&autoplay=1'); break;
                             case '43': window.location.assign('https:youtube.com/embed/LbMj3I6o8ec?si=zmu4M_N744rVfL68&autoplay=1'); break;
-                            case '44': window.location.assign('www.https:youtube.com/live/vXGWaUZjDAQ?si=Gqu1cRVW6pb38RQX&autoplay=1'); break;
+                            case '44': window.location.assign('https:youtube.com/embed/vXGWaUZjDAQ?si=Gqu1cRVW6pb38RQX&autoplay=1'); break;
                             case '45': window.location.assign('https:youtube.com/embed/43q1gqJClYc?si=oJwl91uqf6sPJX7c&autoplay=1'); break;
                             case '46': window.location.assign('https:youtube.com/embed/JqVnOTE1dAw?si=d_Nn1jpMJwuv7o09&autoplay=1'); break;
                             case '47': window.location.assign('https:youtube.com/embed/ywwfV2VqBNg?si=MwBJ1crhYYteHMi1&autoplay=1'); break;
@@ -107,9 +118,10 @@
                             case '55': window.location.assign('https:youtube.com/embed/SqYokzzvlx0?si=bQ48tvOwnWT8CL4-&autoplay=1'); break;
                             case '56': window.location.assign('https:youtube.com/embed/PrWJhgDoAF4?si=tj1bsy5y8Ufgvuil&autoplay=1'); break;
                             case '57': window.location.assign('https:youtube.com/embed/bHLgLU5spfw?si=3AvN7iQ3Os3tnsTe&autoplay=1'); break;
-                            case '58': window.location.assign('https:youtube.com/embed/QJ_68ynfQLo?si=E9fIu86bx4tDtjKi&autoplay=1'); break;
-                            case '59': window.location.assign('https:youtube.com/embed/2qoxaSxAkB8?si=SKVBjVU8YkgSxhdg&autoplay=1'); break;
-                            case '60': window.location.assign('https:youtube.com/embed/8hsy5KLEOgc?si=FT8Q7kGZz2WhCa2v&autoplay=1'); break;
+                            case '58': window.location.assign('https://www.youtube.com/embed/jfKfPfyJRdk?si=X_b03pif-JbyzW1n&autoplay=1'); 
+                            break;
+                            case '59': window.location.assign('https://www.youtube.com/embed/jfKfPfyJRdk?si=X_b03pif-JbyzW1n&autoplay=1'); break; // ESTE NO
+                            case '60': window.location.assign('https:youtube.com/embed/6UlasOF_ee0?si=X_b03pif-JbyzW1n&autoplay=1'); break;
                             case '61': window.location.assign('https:youtube.com/embed/NZ0I2GHgavU?si=j93Ey8B1un07vuLn&autoplay=1'); break;
                             case '62': window.location.assign('https:youtube.com/embed/Pc7MgRYjLxU?si=Qa5i0YYCHiRw-DDX&autoplay=1'); break;
                             case '63': window.location.assign('https:youtube.com/embed/amEEuXT1bgI?si=X_coXYBpDFwaR9bM&autoplay=1'); break;
@@ -119,7 +131,7 @@
                             case '67': window.location.assign('https:youtube.com/embed/lSm4QZqN8cA?si=D33nphqP3w29asUd&autoplay=1'); break;
                             case '68': window.location.assign('https:youtube.com/embed/01aV_PbiT30?si=2VA1vF8V38OJOcMS&autoplay=1'); break;
                             case '69': window.location.assign('https:youtube.com/embed/hS1rML81A_E?si=bULLedawj2D2YgTk&autoplay=1'); break;
-                            case '70': window.location.assign('https:youtube.com/embed/J3pXcqH87s4?si=fveFpdc5MV6NPbat&autoplay=1'); break;
+                            case '70': window.location.assign('https:youtube.com/embed/vmVtgmgLPzw?si=pWtN5vF_1msLAO5G&autoplay=1'); break; // ESTE TAMPOCO
                             case '71': window.location.assign('https:youtube.com/embed/D330hKp8fgo?si=KCTm5rTM0ph1hGcd&autoplay=1'); break;
                             case '72': window.location.assign('https:youtube.com/embed/0CmiSiujNzs?si=8jlHuKtztUC2dBX-&autoplay=1'); break;
                             case '73': window.location.assign('https:youtube.com/embed/B1HLUUB0aig?si=quSxI13PNd-zfdFW&autoplay=1'); break;
