@@ -63,10 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = $_POST['data'] ?? 'No data received';
 
     if($data == 'PREV'){
-        echo "<h1>
-            Retrocediendo
-        </h1>";
-        // system("cmd /c C:/control/ejecutar.bat");
         system("cmd /c C:/xampp/htdocs/control_esp32/iratras.bat");
         $diferencia_en_segundos = 10;
     }
@@ -74,7 +70,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = "CH+";
     }
     if($data == 'VOL_mas'){
+        system("cmd /c C:/xampp/htdocs/control_esp32/masvolumen.bat");
         $data = "VOL+";
+    }
+    if($data == 'VOL-'){
+        system("cmd /c C:/xampp/htdocs/control_esp32/menosvolumen.bat");
+        $diferencia_en_segundos = 10;
+    }
+    if($data == 'PLAYPAUSE'){
+        system("cmd /c C:/xampp/htdocs/control_esp32/pausarresumir.bat");
+        $diferencia_en_segundos = 10;
     }
 
     // Si el valor recibido no es numérico, vaciar la tabla y guardarlo como primer valor
